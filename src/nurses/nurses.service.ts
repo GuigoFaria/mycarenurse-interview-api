@@ -1,23 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { CreateNurseDto } from './dto/create-nurse.dto';
-import { UpdateNurseDto } from './dto/update-nurse.dto';
+import { Repository } from 'typeorm';
+import { Nurse } from './entities/nurse.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class NursesService {
+  constructor(
+    @InjectRepository(Nurse)
+    private readonly nursesRepository: Repository<Nurse>,
+  ) {}
   create(createNurseDto: CreateNurseDto) {
-    return 'This action adds a new nurse';
-  }
-
-  findAll() {
-    return `This action returns all nurses`;
+    return this.nursesRepository.save(createNurseDto);
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} nurse`;
-  }
-
-  update(id: number, updateNurseDto: UpdateNurseDto) {
-    return `This action updates a #${id} nurse`;
+    return this.nursesRepository.findOneBy({ id });
   }
 
   remove(id: number) {
