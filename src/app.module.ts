@@ -4,11 +4,19 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from './db/data-source';
+import { NursesModule } from './nurses/nurses.module';
+import { DutyShiftsModule } from './duty-shifts/duty-shifts.module';
+import { HealthUnitsModule } from './health-units/health-units.module';
+import { AddressesModule } from './addresses/addresses.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(dataSourceOptions),
+    NursesModule,
+    DutyShiftsModule,
+    HealthUnitsModule,
+    AddressesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
