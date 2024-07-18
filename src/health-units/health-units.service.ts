@@ -3,7 +3,7 @@ import { CreateHealthUnitDto } from './dto/create-health-unit.dto';
 import { Repository } from 'typeorm';
 import { HealthUnit } from './entities/health-unit.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AddressesService } from 'src/addresses/addresses.service';
+import { AddressesService } from '../addresses/addresses.service';
 
 @Injectable()
 export class HealthUnitsService {

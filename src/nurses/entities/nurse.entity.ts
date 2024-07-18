@@ -1,4 +1,4 @@
-import { DutyShift } from 'src/duty-shifts/entities/duty-shift.entity';
+import { DutyShift } from '../../duty-shifts/entities/duty-shift.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
 
 @Entity()
