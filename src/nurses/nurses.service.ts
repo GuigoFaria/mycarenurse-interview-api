@@ -3,6 +3,7 @@ import { CreateNurseDto } from './dto/create-nurse.dto';
 import { In, Repository } from 'typeorm';
 import { Nurse } from './entities/nurse.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { genSalt, hash } from 'bcrypt';
 
 @Injectable()
 export class NursesService {
@@ -10,12 +11,27 @@ export class NursesService {
     @InjectRepository(Nurse)
     private readonly nursesRepository: Repository<Nurse>,
   ) {}
-  create(createNurseDto: CreateNurseDto) {
-    return this.nursesRepository.save(createNurseDto);
+  async create(createNurseDto: CreateNurseDto) {
+    const salt = await genSalt();
+    const hashedPassword = await hash(createNurseDto.password, salt);
+    return this.nursesRepository.save({
+      ...createNurseDto,
+      password: hashedPassword,
+    });
   }
 
-  findOne(id: number) {
-    return this.nursesRepository.findOneBy({ id });
+  findByEmail(email: string) {
+    return this.nursesRepository.findOne({
+      where: { email },
+      select: [
+        'email',
+        'password',
+        'id',
+        'name',
+        'registrationCouncilNursing',
+        'stateCouncilNursing',
+      ],
+    });
   }
 
   findAllByIds(ids: number[]) {
@@ -23,6 +39,6 @@ export class NursesService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} nurse`;
+    return this.nursesRepository.delete({ id });
   }
 }

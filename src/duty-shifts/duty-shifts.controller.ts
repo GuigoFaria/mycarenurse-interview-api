@@ -7,10 +7,12 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { DutyShiftsService } from './duty-shifts.service';
 import { CreateDutyShiftDto } from './dto/create-duty-shift.dto';
 import { UpdateDutyShiftDto } from './dto/update-duty-shift.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('duty-shifts')
 export class DutyShiftsController {
@@ -27,6 +29,7 @@ export class DutyShiftsController {
   }
 
   @Put(':id')
+  @UseGuards(AuthGuard('jwt'))
   update(
     @Param('id') id: number,
     @Body() updateDutyShiftDto: UpdateDutyShiftDto,

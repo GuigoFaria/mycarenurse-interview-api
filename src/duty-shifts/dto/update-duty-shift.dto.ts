@@ -1,10 +1,10 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { CreateDutyShiftDto } from './create-duty-shift.dto';
-import { IsNumber, IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsArray } from 'class-validator';
 
 export class UpdateDutyShiftDto {
   @ApiProperty({ description: 'Ids for nurses', type: Number })
-  @IsNumber()
+  @IsArray()
   @IsNotEmpty()
   nurseIds: number[];
 }

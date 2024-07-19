@@ -5,7 +5,6 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  OneToMany,
   ManyToMany,
 } from 'typeorm';
 
@@ -26,6 +25,6 @@ export class DutyShift {
   @Column({ type: 'varchar', length: 255 })
   description: string;
 
-  @ManyToMany(() => Nurse, (nurse) => nurse.dutyShift)
+  @ManyToMany(() => Nurse, (nurse) => nurse.dutyShifts)
   nurses: Nurse[];
 }

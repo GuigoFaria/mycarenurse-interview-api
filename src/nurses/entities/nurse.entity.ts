@@ -1,5 +1,11 @@
 import { DutyShift } from '../../duty-shifts/entities/duty-shift.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 
 @Entity()
 export class Nurse {
@@ -18,9 +24,14 @@ export class Nurse {
   @Column({ type: 'varchar', length: 255, unique: true })
   email: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, select: false })
   password: string;
 
   @ManyToMany(() => DutyShift, (dutyShift) => dutyShift.nurses)
-  dutyShift: DutyShift[];
+  @JoinTable({
+    name: 'nurse_duty_shifts', // nome da tabela de junção
+    joinColumn: { name: 'nurse_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'duty_shift_id', referencedColumnName: 'id' },
+  })
+  dutyShifts: DutyShift[];
 }

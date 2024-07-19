@@ -8,6 +8,7 @@ import { NursesModule } from './nurses/nurses.module';
 import { DutyShiftsModule } from './duty-shifts/duty-shifts.module';
 import { HealthUnitsModule } from './health-units/health-units.module';
 import { AddressesModule } from './addresses/addresses.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -15,10 +16,11 @@ import { AddressesModule } from './addresses/addresses.module';
     TypeOrmModule.forRoot(dataSourceOptions),
     NursesModule,
     DutyShiftsModule,
+    AuthModule,
     HealthUnitsModule,
     AddressesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

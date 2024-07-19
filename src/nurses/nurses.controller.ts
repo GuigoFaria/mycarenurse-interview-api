@@ -19,11 +19,6 @@ export class NursesController {
     return this.nursesService.create(createNurseDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: number) {
-    return this.nursesService.findOne(id);
-  }
-
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.nursesService.remove(id);
