@@ -35,6 +35,10 @@ export class DutyShiftsService {
     return dutyShift;
   }
 
+  async findAll() {
+    return this.dutyShiftsRepository.find();
+  }
+
   async findAllByHealthUnit(id: number) {
     const healthUnit = await this.healthUnitsService.findOne(id);
 

@@ -28,6 +28,12 @@ export class DutyShiftsController {
     return this.dutyShiftsService.findAllByHealthUnit(id);
   }
 
+  @Get()
+  @UseGuards(AuthGuard('jwt'))
+  findAll() {
+    return this.dutyShiftsService.findAll();
+  }
+
   @Put(':id')
   @UseGuards(AuthGuard('jwt'))
   update(

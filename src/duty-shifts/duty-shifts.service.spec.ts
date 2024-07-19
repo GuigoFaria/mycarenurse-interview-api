@@ -162,4 +162,20 @@ describe('DutyShiftsService', () => {
       expect(mockDutyShiftRepository.delete).toHaveBeenCalledWith(1);
     });
   });
+
+  describe('findAll', () => {
+    it('should find all duty shifts', async () => {
+      const healthUnit1 = { id: 1, name: 'Health Unit 1' };
+      const healthUnit2 = { id: 2, name: 'Health Unit 1' };
+      const dutyShifts = [
+        { id: 1, healthUnit1 },
+        { id: 2, healthUnit2 },
+      ];
+
+      mockDutyShiftRepository.find.mockResolvedValue(dutyShifts);
+      const result = await service.findAll();
+      expect(result).toEqual(dutyShifts);
+      expect(mockDutyShiftRepository.find).toHaveBeenCalledWith();
+    });
+  });
 });

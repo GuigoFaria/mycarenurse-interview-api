@@ -13,6 +13,7 @@ describe('DutyShiftsController', () => {
     findAllByHealthUnit: jest.fn(),
     update: jest.fn(),
     remove: jest.fn(),
+    findAll: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -88,6 +89,18 @@ describe('DutyShiftsController', () => {
 
       expect(await controller.remove(1)).toEqual(result);
       expect(service.remove).toHaveBeenCalledWith(1);
+    });
+  });
+
+  describe('findAll', () => {
+    it('should find all duty shifts', async () => {
+      const result = [{ id: 1, healthUnit: { id: 1, name: 'Health Unit 1' } }];
+      jest
+        .spyOn(service, 'findAll')
+        .mockImplementation(async () => result as any);
+
+      expect(await controller.findAll()).toEqual(result);
+      expect(service.findAll).toHaveBeenCalledWith();
     });
   });
 });
