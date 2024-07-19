@@ -17,11 +17,14 @@ export class DutyShift {
   @ManyToOne(() => HealthUnit, (healthUnit) => healthUnit.dutyShifts)
   healthUnit: HealthUnit;
 
-  @Column({ type: 'time' })
-  timeInit: string;
+  @Column({ type: 'timestamptz' })
+  timeInit: Date;
 
-  @Column({ type: 'time' })
-  timeEnd: string;
+  @Column({ type: 'timestamptz' })
+  timeEnd: Date;
+
+  @Column({ type: 'varchar', length: 255 })
+  description: string;
 
   @ManyToMany(() => Nurse, (nurse) => nurse.dutyShift)
   nurses: Nurse[];

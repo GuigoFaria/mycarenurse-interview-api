@@ -16,4 +16,9 @@ export class CreateDutyShiftDto {
   @IsString()
   @IsNotEmpty()
   timeEnd: string;
+
+  @ApiProperty({ description: 'Description of the duty shift' })
+  @IsString()
+  @IsNotEmpty()
+  description: string;
 }

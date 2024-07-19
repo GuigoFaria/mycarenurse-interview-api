@@ -1,4 +1,10 @@
-import { PartialType } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { CreateDutyShiftDto } from './create-duty-shift.dto';
+import { IsNumber, IsNotEmpty } from 'class-validator';
 
-export class UpdateDutyShiftDto extends PartialType(CreateDutyShiftDto) {}
+export class UpdateDutyShiftDto {
+  @ApiProperty({ description: 'Ids for nurses', type: Number })
+  @IsNumber()
+  @IsNotEmpty()
+  nurseIds: number[];
+}

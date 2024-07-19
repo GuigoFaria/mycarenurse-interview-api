@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateNurseDto } from './dto/create-nurse.dto';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Nurse } from './entities/nurse.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -16,6 +16,10 @@ export class NursesService {
 
   findOne(id: number) {
     return this.nursesRepository.findOneBy({ id });
+  }
+
+  findAllByIds(ids: number[]) {
+    return this.nursesRepository.find({ where: { id: In(ids) } });
   }
 
   remove(id: number) {

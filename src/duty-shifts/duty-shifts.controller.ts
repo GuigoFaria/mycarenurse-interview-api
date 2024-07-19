@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { DutyShiftsService } from './duty-shifts.service';
 import { CreateDutyShiftDto } from './dto/create-duty-shift.dto';
 import { UpdateDutyShiftDto } from './dto/update-duty-shift.dto';
@@ -12,23 +21,21 @@ export class DutyShiftsController {
     return this.dutyShiftsService.create(createDutyShiftDto);
   }
 
-  @Get()
-  findAll() {
-    return this.dutyShiftsService.findAll();
+  @Get('/health-units/:healthUnitId')
+  findOne(@Param('healthUnitId') id: number) {
+    return this.dutyShiftsService.findAllByHealthUnit(id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.dutyShiftsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDutyShiftDto: UpdateDutyShiftDto) {
-    return this.dutyShiftsService.update(+id, updateDutyShiftDto);
+  @Put(':id')
+  update(
+    @Param('id') id: number,
+    @Body() updateDutyShiftDto: UpdateDutyShiftDto,
+  ) {
+    return this.dutyShiftsService.update(id, updateDutyShiftDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.dutyShiftsService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.dutyShiftsService.remove(id);
   }
 }
