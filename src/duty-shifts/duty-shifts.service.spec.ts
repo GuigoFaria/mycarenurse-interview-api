@@ -175,7 +175,9 @@ describe('DutyShiftsService', () => {
       mockDutyShiftRepository.find.mockResolvedValue(dutyShifts);
       const result = await service.findAll();
       expect(result).toEqual(dutyShifts);
-      expect(mockDutyShiftRepository.find).toHaveBeenCalledWith();
+      expect(mockDutyShiftRepository.find).toHaveBeenCalledWith({
+        relations: ['healthUnit', 'nurses'],
+      });
     });
   });
 });
