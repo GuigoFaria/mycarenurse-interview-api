@@ -17,7 +17,7 @@ export class HealthUnit {
   @Column({ type: 'varchar', length: 255 })
   name: string;
 
-  @OneToOne(() => Address, { cascade: true })
+  @OneToOne(() => Address, { cascade: true, eager: true })
   @JoinColumn()
   address: Address;
 

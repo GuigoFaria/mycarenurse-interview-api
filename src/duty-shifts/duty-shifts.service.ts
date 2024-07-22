@@ -36,7 +36,9 @@ export class DutyShiftsService {
   }
 
   async findAll() {
-    return this.dutyShiftsRepository.find();
+    return this.dutyShiftsRepository.find({
+      relations: ['healthUnit', 'nurses'],
+    });
   }
 
   async findAllByHealthUnit(id: number) {
